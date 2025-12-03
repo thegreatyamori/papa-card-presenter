@@ -1,15 +1,26 @@
 <template>
   <div id="app">
-    <h1>Papa Card Presenter</h1>
-    <input
-      v-model="inputIds"
-      placeholder="Ingresa IDs separados por coma (ej: 1,3,5)"
-    />
-    <button @click="searchQuestions">Buscar</button>
-    <ul v-if="questions.length">
-      <li v-for="q in questions" :key="q.id">{{ q.question }}</li>
-    </ul>
-    <p v-else-if="searched">No se encontraron preguntas.</p>
+    <header class="header-bar">
+      <input
+        v-model="inputIds"
+        placeholder="Ingresa IDs separados por coma (ej: 1,3,5)"
+        class="search-input"
+        @keydown.enter="searchQuestions"
+      />
+      <button @click="searchQuestions" class="search-button">Buscar</button>
+    </header>
+    <main class="cards-container">
+      <div v-if="questions.length" class="cards-grid">
+        <div v-for="q in questions" :key="q.id" class="card">
+          <div class="card-content">
+            <div class="category">{{ q.category }}</div>
+            <div class="question">{{ q.question }}</div>
+            <div class="id">{{ q.id }}</div>
+          </div>
+        </div>
+      </div>
+      <p v-else-if="searched" class="no-results">No se encontraron preguntas</p>
+    </main>
   </div>
 </template>
 
@@ -52,13 +63,153 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500; /* Medium para legibilidad y grosor */
+  background: linear-gradient(
+    135deg,
+    #ff6b6b,
+    #4ecdc4,
+    #ffe66d,
+    #a8e6cf
+  ); /* Paleta viva */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-input {
+  flex: 1;
+  padding: 15px 20px;
+  border: 2px solid #ff6b6b;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  margin-right: 10px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  border-color: #4ecdc4;
+}
+
+.search-button {
+  padding: 15px 30px;
+  background: #ffe66d;
+  border: none;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-button:hover {
+  background: #ffd93d;
+}
+
+.cards-container {
+  flex: 1;
+}
+
+.cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 70vh; /* Reducido para evitar scroll */
+  width: 100%;
+  padding-top: 2%;
+}
+
+.card {
+  background: url("https://cdn.wellpapers.com/wp-content/uploads/2024/10/n648-motif-600x902.jpg")
+    repeat;
+  background-size: 300px 400px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.5); /* Sombra y brillito */
+  overflow: hidden;
+  position: relative;
+  width: 275px;
+  height: 60%; /* Reducido para que quepan 4 cartas sin scroll */
+  transform: rotate(-1deg); /* Ligero giro para apariencia de carta */
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.card-content {
+  padding: 20px 0;
+  background: rgb(255 255 255 / 85%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.category {
+  position: absolute;
+  top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.question {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-size: 28px;
+  color: #333;
+  margin: 20px 0;
+}
+
+.id {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 25px;
+  color: black;
+}
+
+.no-results {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 64px;
+  color: black;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+</style>
+
+<style>
+body {
+  margin: 0;
 }
 </style>
