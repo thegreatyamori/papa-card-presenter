@@ -58,4 +58,4 @@ Cada pregunta debe tener:
 
 - `id`: número secuencial (1-100)
 - `categoria`: una de las 5 categorías listadas
-- `pregunta`: texto de la pregunta (máx 100 caracteres, específica y concreta)
+- `pregunta`: texto de la pregunta dentro de comillas dobles (máx 100 caracteres, específica y concreta)
