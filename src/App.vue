@@ -13,7 +13,12 @@
       <div v-if="questions.length" class="cards-grid">
         <div v-for="q in questions" :key="q.id" class="card">
           <div class="card-content">
-            <div class="category">{{ q.category }}</div>
+            <div
+              class="category"
+              :style="{ backgroundColor: getCategoryColor(q.category) }"
+            >
+              {{ q.category }}
+            </div>
             <div class="question">{{ q.question }}</div>
             <div class="id">{{ q.id }}</div>
           </div>
@@ -56,8 +61,26 @@ export default {
         .filter((id) => id);
       this.questions = this.allQuestions
         .filter((q) => ids.includes(q.id))
-        .slice(0, 4);
+        .slice(0, 5);
       this.searched = true;
+    },
+    getCategoryColor(category) {
+      const colors = [
+        "#ff6b6b",
+        "#4ecdc4",
+        "#ffe66d",
+        "#a8e6cf",
+        "#dda0dd",
+        "#98fb98",
+        "#ffb6c1",
+        "#87ceeb",
+        "#f0e68c",
+      ];
+      let hash = 0;
+      for (let i = 0; i < category.length; i++) {
+        hash = category.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      return colors[Math.abs(hash) % colors.length];
     },
   },
 };
@@ -131,7 +154,7 @@ export default {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  height: 70vh; /* Reducido para evitar scroll */
+  height: auto;
   width: 100%;
   padding-top: 2%;
 }
@@ -146,7 +169,7 @@ export default {
   overflow: hidden;
   position: relative;
   width: 275px;
-  height: 60%; /* Reducido para que quepan 4 cartas sin scroll */
+  height: 300px;
   transform: rotate(-1deg); /* Ligero giro para apariencia de carta */
   transition: transform 0.3s;
 }
@@ -173,9 +196,13 @@ export default {
 .category {
   position: absolute;
   top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 24px;
   font-weight: bold;
   color: #333;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 .question {
