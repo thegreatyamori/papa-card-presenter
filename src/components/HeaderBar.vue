@@ -8,6 +8,16 @@
       @keydown.enter="$emit('search')"
     />
     <button @click="$emit('search')" class="search-button">Buscar</button>
+    <button
+      v-if="showViewAll"
+      @click="$emit('view-all')"
+      class="view-all-button"
+    >
+      Ver todo
+    </button>
+    <button v-if="showBack" @click="$emit('back')" class="back-button">
+      Volver
+    </button>
   </header>
 </template>
 
@@ -18,8 +28,16 @@ export default {
       type: String,
       default: "",
     },
+    showViewAll: {
+      type: Boolean,
+      default: false,
+    },
+    showBack: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ["update:inputIds", "search"],
+  emits: ["update:inputIds", "search", "view-all", "back"],
 };
 </script>
 
@@ -64,5 +82,53 @@ export default {
 
 .search-button:hover {
   background: #ffd93d;
+}
+
+.view-all-button {
+  padding: 15px 20px;
+  background: #4ecdc4;
+  border: none;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background 0.3s;
+}
+
+.view-all-button:hover {
+  background: #45b7aa;
+}
+
+.back-button {
+  padding: 15px 20px;
+  background: #ff6b6b;
+  border: none;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background 0.3s;
+}
+
+.back-button:hover {
+  background: #e55a5a;
+}
+</style>
+
+<style>
+@media print {
+  .header-bar {
+    display: none;
+  }
+  .view-all-button,
+  .back-button {
+    display: none;
+  }
 }
 </style>

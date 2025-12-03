@@ -29,16 +29,18 @@ export default {
         "#ffe66d",
         "#a8e6cf",
         "#dda0dd",
-        "#98fb98",
+        "#32cd32",
         "#ffb6c1",
         "#87ceeb",
         "#f0e68c",
+        "#ff6347",
       ];
-      let hash = 0;
-      for (let i = 0; i < category.length; i++) {
-        hash = category.charCodeAt(i) + ((hash << 5) - hash);
-      }
-      return colors[Math.abs(hash) % colors.length];
+    const categoryColors = JSON.parse(localStorage.getItem('categoryColors') || '{}');
+    if (!categoryColors[category]) {
+      categoryColors[category] = colors[Object.keys(categoryColors).length % colors.length];
+      localStorage.setItem('categoryColors', JSON.stringify(categoryColors));
+    }
+    return categoryColors[category];
     },
   },
 };
@@ -104,5 +106,16 @@ export default {
   right: 10px;
   font-size: 25px;
   color: black;
+}
+
+@media print {
+  .card {
+    border: 2px dashed #000;
+    box-shadow: none;
+    transform: none;
+  }
+  .card:hover {
+    transform: none;
+  }
 }
 </style>
