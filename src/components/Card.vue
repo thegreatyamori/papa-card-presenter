@@ -125,4 +125,28 @@ export default {
     transform: none;
   }
 }
+
+@media (min-width: 2560px) {
+  .card {
+    width: 500px;
+    height: 550px;
+    background-size: 600px 700px;
+  }
+
+  .card-content {
+    padding: 35px 0;
+  }
+
+  .category {
+    font-size: 45px;
+  }
+
+  .question {
+    font-size: 50px;
+  }
+
+  .id {
+    font-size: 45px;
+  }
+}
 </style>

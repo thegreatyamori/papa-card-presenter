@@ -119,6 +119,28 @@ export default {
 .back-button:hover {
   background: #e55a5a;
 }
+
+@media (min-width: 2560px) {
+  .header-bar {
+    padding: 30px 40px;
+  }
+
+  .search-input {
+    font-size: 50px;
+    padding: 35px 40px;
+  }
+
+  .search-button {
+    font-size: 40px;
+    padding: 35px 50px;
+  }
+
+  .view-all-button,
+  .back-button {
+    font-size: 32px;
+    padding: 35px 40px;
+  }
+}
 </style>
 
 <style>

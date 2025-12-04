@@ -100,4 +100,14 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
+
+@media (min-width: 2560px) {
+  .cards-grid {
+    gap: 50px;
+  }
+
+  .enlarged-card {
+    transform: scale(2.2);
+  }
+}
 </style>

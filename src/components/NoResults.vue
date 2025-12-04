@@ -20,4 +20,11 @@ export default {};
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   text-align: center;
 }
+
+@media (min-width: 2560px) {
+  .no-results {
+    font-size: 120px;
+    padding: 70px;
+  }
+}
 </style>
