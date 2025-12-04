@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "type": "module",
-    "homepage": "https://jer_home.github.io/papa-card-presenter",
+    "homepage": "https://thegreatyamori.github.io/papa-card-presenter",
     "scripts": {
         "build": "vite build",
         "dev": "vite",
