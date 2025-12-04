@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     loadCSV() {
-      Papa.parse("/questions.csv", {
+      Papa.parse(import.meta.env.BASE_URL + "questions.csv", {
         download: true,
         header: true,
         complete: (results) => {
