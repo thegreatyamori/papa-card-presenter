@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="clickable && $emit('select', question)">
     <div class="card-content">
       <div
         class="category"
@@ -20,6 +20,10 @@ export default {
       type: Object,
       required: true,
     },
+    clickable: {
+      type: Boolean,
+      default: true,
+    },
   },
   methods: {
     getCategoryColor(category) {
@@ -35,12 +39,15 @@ export default {
         "#f0e68c",
         "#ff6347",
       ];
-    const categoryColors = JSON.parse(localStorage.getItem('categoryColors') || '{}');
-    if (!categoryColors[category]) {
-      categoryColors[category] = colors[Object.keys(categoryColors).length % colors.length];
-      localStorage.setItem('categoryColors', JSON.stringify(categoryColors));
-    }
-    return categoryColors[category];
+      const categoryColors = JSON.parse(
+        localStorage.getItem("categoryColors") || "{}"
+      );
+      if (!categoryColors[category]) {
+        categoryColors[category] =
+          colors[Object.keys(categoryColors).length % colors.length];
+        localStorage.setItem("categoryColors", JSON.stringify(categoryColors));
+      }
+      return categoryColors[category];
     },
   },
 };
